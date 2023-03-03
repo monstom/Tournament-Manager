@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <!-- ============================================= -->
+  <!-- Project Informations ! -->
+  <!-- ============================================= -->
+  <!-- ============ Maven Informations ============= -->	 
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>PokerApps</groupId>
+  <artifactId>tournament-director</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <!-- ============ General Informations ============= -->
+  <name>Poker Tournament Director</name>
+  <description>Managment of tournaments for all poker variantes and fully customizable.</description>
+  
+  <!-- ============ Authors ============= -->
+  <developers>
+	  <developer>
+		  <name>Thomas Boullé</name>
+		  <email>t.boulle@icloud.com</email>
+		  <url>https://github.com/monstom</url>
+	  </developer>
+  </developers>
+  
+  <!-- ============ Licenses ============= -->
+  <licenses>
+	  <license>
+		  <name></name>
+		  <url></url>
+	  </license>
+  </licenses>
+  
+  <!-- ============ Properties ============= -->
+  <properties>
+	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <!-- ============ Dependencies ============= -->
+  <dependencies>
+	  <dependency>
+		  <groupId>org.junit.jupiter</groupId>
+		  <artifactId>junit-jupiter</artifactId>
+		  <version>5.9.1</version>
+		  <scope>test</scope>
+	  </dependency>
+	  <dependency>
+		  <groupId>org.assertj</groupId>
+		  <artifactId>assertj-core</artifactId>
+		  <version>3.24.2</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>commons-validator</groupId>
+		  <artifactId>commons-validator</artifactId>
+		  <version>1.7</version>
+	  </dependency>
+  </dependencies>
+  
+  <!-- ============ Profiles ============= -->
+  <profiles>
+	  <profile>
+		  <id>ptd-dev</id>
+	  </profile>
+	  <profile>
+		  <id>ptd-test</id>
+	  </profile>
+	  <profile>
+		  <id>ptd-prod</id>
+	  </profile>
+  </profiles>
+  
+  <!-- ============ Build ============= -->
+  <build>
+	  <finalName>${project.name}</finalName>
+	  
+	  <pluginManagement>
+		  <plugins>
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-enforcer-plugin</artifactId>
+				  <version>3.2.1</version>
+				  <executions>
+					  <execution>
+						  <id>enforce-profile-build</id>
+						  <phase>validate</phase>
+						  <goals>
+							  <goal>enforce</goal>
+						  </goals>
+						  <configuration>
+							  <rules>
+								  <requireProfileActivation>
+									  <profiles>pdt-dev,pdt-test,pdt-prod</profiles>
+									  <all>false</all>
+								  </requireProfileActivation>								  
+							  </rules>
+						  </configuration>
+					  </execution>
+				  </executions>
+			  </plugin>
+			  
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-clean-plugin</artifactId>
+				  <version>2.5</version>
+			  </plugin>
+			  <plugin>
+			  	<groupId>org.apache.maven.plugins</groupId>
+			  	<artifactId>maven-resources-plugin</artifactId>
+			  	<version>2.6</version>
+			  </plugin>
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-compiler-plugin</artifactId>
+				  <version>3.11.0</version>
+			  </plugin>
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-jar-plugin</artifactId>
+				  <version>2.4</version>
+				  <configuration>
+					  <archive>
+						  <manifest>
+							  <mainClass></mainClass>
+						  </manifest>
+					  </archive>
+				  </configuration>
+			  </plugin>
+			  <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-install-plugin</artifactId>
+				  <version>3.1.0</version>
+			  </plugin>
+		  </plugins>
+	  </pluginManagement>
+  </build>
+</project>
